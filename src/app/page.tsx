@@ -1,277 +1,419 @@
-"use client"
-
-import Link from "next/link"
-import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, CheckCircle, Menu, X } from "lucide-react"
-import { useState } from "react"
+import { Card } from "@/components/ui/card"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import {
+  ArrowRight,
+  BarChart3,
+  Calendar,
+  ChevronRight,
+  CreditCard,
+  DollarSign,
+  PiggyBank,
+  Wallet,
+} from "lucide-react"
+import Link from "next/link"
 
 export default function Home() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
   return (
     <div className="flex min-h-screen flex-col">
-      {/* Navigation */}
-      <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto flex h-16 items-center justify-between">
-          <div className="flex items-center gap-2 font-bold">
-            <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground">
+          <div className="flex items-center gap-2 font-bold text-xl">
+            <div className="h-7 w-7 rounded-full bg-primary flex items-center justify-center text-primary-foreground">
               J
             </div>
             <span>Julius</span>
           </div>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-6">
+          <nav className="hidden md:flex gap-6">
             <Link href="#features" className="text-sm font-medium hover:text-primary">
-              Funcionalidades
+              Recursos
             </Link>
-            <Link href="#testimonials" className="text-sm font-medium hover:text-primary">
-              Depoimentos
+            <Link href="#how-it-works" className="text-sm font-medium hover:text-primary">
+              Como Funciona
             </Link>
-            <Link href="#pricing" className="text-sm font-medium hover:text-primary">
-              Planos
-            </Link>
-            <Link href="#contact" className="text-sm font-medium hover:text-primary">
-              Contato
-            </Link>
-            <Link href="/auth">
-              <Button>Entrar</Button>
+            <Link href="#dashboard" className="text-sm font-medium hover:text-primary">
+              Dashboard
             </Link>
           </nav>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label={mobileMenuOpen ? "Fechar menu" : "Abrir menu"}
-          >
-            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
+          <Button asChild>
+            <Link href="/auth">Entrar</Link>
+          </Button>
         </div>
-
-        {/* Mobile Navigation */}
-        {mobileMenuOpen && (
-          <div className="md:hidden container mx-auto py-4 border-t">
-            <nav className="flex flex-col space-y-4">
-              <Link
-                href="#features"
-                className="text-sm font-medium hover:text-primary"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Funcionalidades
-              </Link>
-              <Link
-                href="#testimonials"
-                className="text-sm font-medium hover:text-primary"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Depoimentos
-              </Link>
-              <Link
-                href="#pricing"
-                className="text-sm font-medium hover:text-primary"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Planos
-              </Link>
-              <Link
-                href="#contact"
-                className="text-sm font-medium hover:text-primary"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Contato
-              </Link>
-              <Link href="/auth" onClick={() => setMobileMenuOpen(false)}>
-                <Button className="w-full">Entrar</Button>
-              </Link>
-            </nav>
-          </div>
-        )}
       </header>
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="py-12 md:py-24 lg:py-32 xl:py-48">
+        <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-background to-muted">
           <div className="container mx-auto px-4 md:px-6">
-            <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
+            <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_500px]">
               <div className="flex flex-col justify-center space-y-4">
                 <div className="space-y-2">
                   <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
-                    Controle suas finanças com o Julius
+                    Saiba exatamente quanto pode gastar todos os dias
                   </h1>
                   <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                    Simule quanto você pode gastar por dia, gerencie suas receitas e despesas e alcance suas metas financeiras de forma simples e intuitiva.
+                    Transforme sua gestão financeira com uma abordagem diária simples e eficaz. Economize mais e gaste
+                    com consciência.
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                  <Link href="/auth">
-                    <Button size="lg" className="gap-1">
-                      Comece Agora <ArrowRight className="h-4 w-4" />
-                    </Button>
-                  </Link>
-                  <Button size="lg" variant="outline">
-                    Saiba Mais
+                  <Button size="lg" asChild>
+                    <Link href="/auth">
+                      Experimente Grátis
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
+                  <Button variant="outline" size="lg" asChild>
+                    <Link href="#how-it-works">Como Funciona</Link>
                   </Button>
                 </div>
               </div>
-              <Image
-                src="/placeholder.svg?height=550&width=550"
-                width={550}
-                height={550}
-                alt="Visualização do painel do Julius"
-                className="mx-auto aspect-video overflow-hidden rounded-xl object-cover sm:w-full lg:order-last"
-              />
+              <div className="flex items-center justify-center">
+                <Card className="w-full max-w-md overflow-hidden rounded-xl border bg-background shadow-xl">
+                  <div className="p-6">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h3 className="text-2xl font-bold">R$ 127,50</h3>
+                        <p className="text-sm text-muted-foreground">Disponível hoje</p>
+                      </div>
+                      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+                        <DollarSign className="h-6 w-6 text-primary" />
+                      </div>
+                    </div>
+                    <div className="mt-6 space-y-2">
+                      <div className="flex justify-between text-sm">
+                        <span>Receita Mensal:</span>
+                        <span className="font-medium">R$ 5.000,00</span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span>Despesas Fixas:</span>
+                        <span className="font-medium">R$ 2.500,00</span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span>Meta de Economia:</span>
+                        <span className="font-medium">R$ 500,00</span>
+                      </div>
+                      <div className="flex justify-between text-sm font-bold pt-2 border-t">
+                        <span>Disponível por dia:</span>
+                        <span>R$ 66,67</span>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              </div>
             </div>
           </div>
         </section>
 
         {/* Features Section */}
-        <section id="features" className="py-12 md:py-24 lg:py-32 bg-muted">
+        <section id="features" className="w-full py-12 md:py-24 bg-background">
           <div className="container mx-auto px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
-                <div className="inline-block rounded-lg bg-primary px-3 py-1 text-sm text-primary-foreground">
-                  Funcionalidades
-                </div>
-                <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
-                  Tudo para manter suas finanças em dia
-                </h2>
-                <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed">
-                  O Julius oferece ferramentas práticas para você controlar seu dinheiro e atingir seus objetivos financeiros.
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Recursos Principais</h2>
+                <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                  Simplifique sua gestão financeira com ferramentas intuitivas e eficazes
                 </p>
               </div>
             </div>
-            <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-3">
-              {features.map((feature, index) => (
-                <div key={index} className="flex flex-col items-center space-y-4 rounded-lg border p-6 shadow-sm">
-                  <div className="rounded-full bg-primary/10 p-3">{feature.icon}</div>
-                  <h3 className="text-xl font-bold">{feature.title}</h3>
-                  <p className="text-center text-muted-foreground">{feature.description}</p>
+            <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-3 lg:gap-12 mt-8">
+              <div className="flex flex-col items-center space-y-2 rounded-lg p-4 transition-all hover:bg-muted">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
+                  <Calendar className="h-8 w-8 text-primary" />
                 </div>
-              ))}
+                <h3 className="text-xl font-bold">Orçamento Diário</h3>
+                <p className="text-center text-muted-foreground">
+                  Saiba exatamente quanto pode gastar a cada dia com base em sua receita e metas
+                </p>
+              </div>
+              <div className="flex flex-col items-center space-y-2 rounded-lg p-4 transition-all hover:bg-muted">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
+                  <PiggyBank className="h-8 w-8 text-primary" />
+                </div>
+                <h3 className="text-xl font-bold">Metas de Economia</h3>
+                <p className="text-center text-muted-foreground">
+                  Defina quanto deseja economizar mensalmente e acompanhe seu progresso
+                </p>
+              </div>
+              <div className="flex flex-col items-center space-y-2 rounded-lg p-4 transition-all hover:bg-muted">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
+                  <BarChart3 className="h-8 w-8 text-primary" />
+                </div>
+                <h3 className="text-xl font-bold">Análise Visual</h3>
+                <p className="text-center text-muted-foreground">
+                  Visualize seus gastos e economias com gráficos intuitivos e relatórios detalhados
+                </p>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Testimonials Section */}
-        <section id="testimonials" className="py-12 md:py-24 lg:py-32">
+        {/* How it Works Section */}
+        <section id="how-it-works" className="w-full py-12 md:py-24 bg-muted">
           <div className="container mx-auto px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
-                <div className="inline-block rounded-lg bg-primary px-3 py-1 text-sm text-primary-foreground">
-                  Depoimentos
-                </div>
-                <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
-                  O que nossos usuários dizem
-                </h2>
-                <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed">
-                  Veja como o Julius tem ajudado pessoas a transformar sua vida financeira.
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Como Funciona</h2>
+                <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                  Três passos simples para transformar sua gestão financeira
                 </p>
               </div>
             </div>
-            <div className="mx-auto grid max-w-5xl gap-6 py-12 lg:grid-cols-2">
-              {testimonials.map((testimonial, index) => (
-                <div key={index} className="rounded-lg border p-6 shadow-sm">
-                  <div className="flex items-start gap-4">
-                    <Image
-                      src={testimonial.avatar || "/placeholder.svg"}
-                      width={40}
-                      height={40}
-                      alt={testimonial.name}
-                      className="rounded-full"
-                    />
-                    <div>
-                      <h3 className="font-bold">{testimonial.name}</h3>
-                      <p className="text-sm text-muted-foreground">{testimonial.title}</p>
-                    </div>
-                  </div>
-                  <p className="mt-4">{testimonial.content}</p>
+            <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-3 lg:gap-12 mt-8">
+              <div className="relative flex flex-col items-center space-y-4 rounded-lg border bg-background p-6 shadow-sm">
+                <div className="absolute -top-3 -left-3 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground">
+                  1
                 </div>
-              ))}
+                <h3 className="text-xl font-bold">Cadastre seus dados</h3>
+                <p className="text-center text-muted-foreground">
+                  Informe sua receita mensal, despesas fixas e quanto deseja economizar
+                </p>
+              </div>
+              <div className="relative flex flex-col items-center space-y-4 rounded-lg border bg-background p-6 shadow-sm">
+                <div className="absolute -top-3 -left-3 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground">
+                  2
+                </div>
+                <h3 className="text-xl font-bold">Receba seu orçamento diário</h3>
+                <p className="text-center text-muted-foreground">
+                  O app calcula automaticamente quanto você pode gastar por dia
+                </p>
+              </div>
+              <div className="relative flex flex-col items-center space-y-4 rounded-lg border bg-background p-6 shadow-sm">
+                <div className="absolute -top-3 -left-3 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground">
+                  3
+                </div>
+                <h3 className="text-xl font-bold">Acompanhe seus gastos</h3>
+                <p className="text-center text-muted-foreground">
+                  Registre seus gastos diários e veja como está seu orçamento em tempo real
+                </p>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Pricing Section */}
-        <section id="pricing" className="py-12 md:py-24 lg:py-32 bg-muted">
+        {/* Dashboard Preview Section */}
+        <section id="dashboard" className="w-full py-12 md:py-24 bg-background">
           <div className="container mx-auto px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
-                <div className="inline-block rounded-lg bg-primary px-3 py-1 text-sm text-primary-foreground">
-                  Planos
-                </div>
-                <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
-                  Planos simples e transparentes
-                </h2>
-                <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed">
-                  Escolha o plano que melhor se adapta às suas necessidades financeiras.
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Visualize Seus Dados</h2>
+                <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                  Dashboards intuitivos para acompanhar sua jornada financeira
                 </p>
               </div>
             </div>
-            <div className="mx-auto grid max-w-5xl gap-6 py-12 lg:grid-cols-3">
-              {pricingPlans.map((plan, index) => (
-                <div
-                  key={index}
-                  className={`flex flex-col rounded-lg border p-6 shadow-sm ${plan.featured ? "border-primary" : ""}`}
-                >
-                  {plan.featured && (
-                    <div className="inline-block rounded-full bg-primary px-3 py-1 text-xs text-primary-foreground">
-                      Mais Popular
+
+            <div className="mx-auto mt-8 max-w-5xl">
+              <Tabs defaultValue="daily" className="w-full">
+                <TabsList className="grid w-full grid-cols-3">
+                  <TabsTrigger value="daily">Visão Diária</TabsTrigger>
+                  <TabsTrigger value="weekly">Visão Semanal</TabsTrigger>
+                  <TabsTrigger value="monthly">Visão Mensal</TabsTrigger>
+                </TabsList>
+                <TabsContent value="daily" className="border rounded-lg p-4 mt-4">
+                  <div className="aspect-video overflow-hidden rounded-lg border bg-background shadow">
+                    <div className="p-6">
+                      <h3 className="text-xl font-bold mb-4">Hoje: 15 de Março</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <Card className="p-4">
+                          <div className="flex items-center gap-2">
+                            <DollarSign className="h-5 w-5 text-primary" />
+                            <h4 className="font-medium">Disponível</h4>
+                          </div>
+                          <p className="text-2xl font-bold mt-2">R$ 127,50</p>
+                          <p className="text-xs text-muted-foreground">+R$ 60,83 acumulado</p>
+                        </Card>
+                        <Card className="p-4">
+                          <div className="flex items-center gap-2">
+                            <CreditCard className="h-5 w-5 text-yellow-500" />
+                            <h4 className="font-medium">Gastos Hoje</h4>
+                          </div>
+                          <p className="text-2xl font-bold mt-2">R$ 0,00</p>
+                          <p className="text-xs text-muted-foreground">Limite: R$ 66,67</p>
+                        </Card>
+                        <Card className="p-4">
+                          <div className="flex items-center gap-2">
+                            <PiggyBank className="h-5 w-5 text-green-500" />
+                            <h4 className="font-medium">Economia</h4>
+                          </div>
+                          <p className="text-2xl font-bold mt-2">R$ 250,00</p>
+                          <p className="text-xs text-muted-foreground">Meta: R$ 500,00</p>
+                        </Card>
+                      </div>
+                      <div className="mt-6">
+                        <h4 className="font-medium mb-2">Transações Recentes</h4>
+                        <div className="space-y-2">
+                          <div className="flex items-center justify-between p-2 rounded-md hover:bg-muted">
+                            <div className="flex items-center gap-2">
+                              <div className="h-8 w-8 rounded-full bg-muted flex items-center justify-center">
+                                <CreditCard className="h-4 w-4" />
+                              </div>
+                              <div>
+                                <p className="font-medium">Supermercado</p>
+                                <p className="text-xs text-muted-foreground">Ontem, 18:30</p>
+                              </div>
+                            </div>
+                            <p className="font-medium text-red-500">-R$ 45,75</p>
+                          </div>
+                          <div className="flex items-center justify-between p-2 rounded-md hover:bg-muted">
+                            <div className="flex items-center gap-2">
+                              <div className="h-8 w-8 rounded-full bg-muted flex items-center justify-center">
+                                <CreditCard className="h-4 w-4" />
+                              </div>
+                              <div>
+                                <p className="font-medium">Restaurante</p>
+                                <p className="text-xs text-muted-foreground">Ontem, 12:15</p>
+                              </div>
+                            </div>
+                            <p className="font-medium text-red-500">-R$ 32,90</p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  )}
-                  <h3 className="mt-4 text-xl font-bold">{plan.name}</h3>
-                  <p className="mt-2 text-muted-foreground">{plan.description}</p>
-                  <div className="mt-4 flex items-baseline">
-                    <span className="text-3xl font-bold">R${plan.price}</span>
-                    <span className="ml-1 text-muted-foreground">/mês</span>
                   </div>
-                  <ul className="mt-6 space-y-3">
-                    {plan.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center">
-                        <CheckCircle className="mr-2 h-4 w-4 text-primary" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Link href="/auth" className="mt-8">
-                    <Button className="w-full" variant={plan.featured ? "default" : "outline"}>
-                      Comece Agora
-                    </Button>
-                  </Link>
-                </div>
-              ))}
+                </TabsContent>
+                <TabsContent value="weekly" className="border rounded-lg p-4 mt-4">
+                  <div className="aspect-video overflow-hidden rounded-lg border bg-background shadow">
+                    <div className="p-6">
+                      <h3 className="text-xl font-bold mb-4">Semana: 11 a 17 de Março</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <Card className="p-4">
+                          <h4 className="font-medium mb-2">Gastos Diários</h4>
+                          <div className="h-[200px] w-full bg-muted rounded-md flex items-end justify-between p-4">
+                            {[65, 45, 78, 32, 55, 0, 0].map((value, index) => (
+                              <div key={index} className="flex flex-col items-center gap-1">
+                                <div
+                                  className="w-8 bg-primary rounded-t-sm"
+                                  style={{ height: `${value * 1.5}px` }}
+                                ></div>
+                                <span className="text-xs">
+                                  {["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"][index]}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                        </Card>
+                        <Card className="p-4">
+                          <h4 className="font-medium mb-2">Resumo da Semana</h4>
+                          <div className="space-y-4">
+                            <div className="flex justify-between">
+                              <span>Orçamento Semanal:</span>
+                              <span className="font-bold">R$ 466,69</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span>Gasto até agora:</span>
+                              <span className="font-bold text-red-500">R$ 275,00</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span>Disponível:</span>
+                              <span className="font-bold text-green-500">R$ 191,69</span>
+                            </div>
+                            <div className="pt-2 border-t">
+                              <div className="flex justify-between">
+                                <span>Economia projetada:</span>
+                                <span className="font-bold">+ R$ 25,02</span>
+                              </div>
+                            </div>
+                          </div>
+                        </Card>
+                      </div>
+                    </div>
+                  </div>
+                </TabsContent>
+                <TabsContent value="monthly" className="border rounded-lg p-4 mt-4">
+                  <div className="aspect-video overflow-hidden rounded-lg border bg-background shadow">
+                    <div className="p-6">
+                      <h3 className="text-xl font-bold mb-4">Março 2024</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <Card className="p-4">
+                          <h4 className="font-medium mb-2">Distribuição de Gastos</h4>
+                          <div className="h-[200px] w-full bg-muted rounded-md flex items-center justify-center">
+                            <div className="relative h-32 w-32 rounded-full border-8 border-primary">
+                              <div
+                                className="absolute top-0 right-0 bottom-0 left-0 border-8 border-yellow-500 rounded-full"
+                                style={{ clipPath: "polygon(50% 50%, 100% 50%, 100% 0, 50% 0)" }}
+                              ></div>
+                              <div
+                                className="absolute top-0 right-0 bottom-0 left-0 border-8 border-green-500 rounded-full"
+                                style={{ clipPath: "polygon(50% 50%, 50% 0, 0 0, 0 100%, 50% 100%)" }}
+                              ></div>
+                            </div>
+                          </div>
+                          <div className="flex justify-between mt-4">
+                            <div className="flex items-center gap-1">
+                              <div className="h-3 w-3 bg-primary rounded-full"></div>
+                              <span className="text-xs">Essenciais</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <div className="h-3 w-3 bg-yellow-500 rounded-full"></div>
+                              <span className="text-xs">Lazer</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <div className="h-3 w-3 bg-green-500 rounded-full"></div>
+                              <span className="text-xs">Outros</span>
+                            </div>
+                          </div>
+                        </Card>
+                        <Card className="p-4">
+                          <h4 className="font-medium mb-2">Progresso Mensal</h4>
+                          <div className="space-y-4">
+                            <div>
+                              <div className="flex justify-between text-sm mb-1">
+                                <span>Gastos</span>
+                                <span>45%</span>
+                              </div>
+                              <div className="h-2 w-full bg-muted rounded-full overflow-hidden">
+                                <div className="h-full bg-yellow-500 w-[45%]"></div>
+                              </div>
+                            </div>
+                            <div>
+                              <div className="flex justify-between text-sm mb-1">
+                                <span>Economia</span>
+                                <span>50%</span>
+                              </div>
+                              <div className="h-2 w-full bg-muted rounded-full overflow-hidden">
+                                <div className="h-full bg-green-500 w-[50%]"></div>
+                              </div>
+                            </div>
+                            <div className="pt-4 border-t mt-4">
+                              <div className="flex justify-between">
+                                <span>Dias restantes:</span>
+                                <span className="font-bold">16</span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span>Disponível por dia:</span>
+                                <span className="font-bold">R$ 66,67</span>
+                              </div>
+                            </div>
+                          </div>
+                        </Card>
+                      </div>
+                    </div>
+                  </div>
+                </TabsContent>
+              </Tabs>
             </div>
           </div>
         </section>
 
         {/* CTA Section */}
-        <section id="contact" className="py-12 md:py-24 lg:py-32 border-t">
+        <section id="try-now" className="w-full py-12 md:py-24 lg:py-32 bg-primary text-primary-foreground">
           <div className="container mx-auto px-4 md:px-6">
-            <div className="grid gap-10 px-10 md:gap-16 lg:grid-cols-2">
-              <div className="space-y-4">
-                <div className="inline-block rounded-lg bg-primary px-3 py-1 text-sm text-primary-foreground">
-                  Pronto para começar?
-                </div>
-                <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
-                  Transforme sua vida financeira hoje
+            <div className="flex flex-col items-center justify-center space-y-4 text-center">
+              <div className="space-y-2">
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+                  Comece a controlar suas finanças hoje
                 </h2>
-                <p className="text-muted-foreground md:text-xl/relaxed">
-                  Junte-se a milhares de usuários que já estão no controle de suas finanças.
+                <p className="max-w-[700px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                  Experimente gratuitamente e transforme sua relação com o dinheiro
                 </p>
-                <Link href="/auth">
-                  <Button size="lg" className="gap-1">
-                    Comece Agora <ArrowRight className="h-4 w-4" />
-                  </Button>
-                </Link>
               </div>
-              <div className="flex flex-col items-center justify-center space-y-4 rounded-lg border p-8 shadow-sm">
-                <h3 className="text-xl font-bold">Fale com nossa equipe</h3>
-                <p className="text-center text-muted-foreground">
-                  Tem dúvidas? Nossa equipe está pronta para ajudar você a alcançar suas metas financeiras.
-                </p>
-                <Button variant="outline" size="lg" className="w-full">
-                  Contato
+              <div className="flex flex-col gap-2 min-[400px]:flex-row">
+                <Button size="lg" variant="secondary" asChild>
+                  <Link href="/auth">
+                    Começar agora
+                    <ChevronRight className="ml-1 h-4 w-4" />
+                  </Link>
                 </Button>
               </div>
             </div>
@@ -279,109 +421,19 @@ export default function Home() {
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="border-t py-6 md:py-8">
-        <div className="container mx-auto flex flex-col gap-4 md:flex-row md:items-center">
+      <footer className="w-full border-t py-6 md:py-0">
+        <div className="container mx-auto flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
           <div className="flex items-center gap-2 font-bold">
-            <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground">
+            <div className="h-7 w-7 rounded-full bg-primary flex items-center justify-center text-primary-foreground">
               J
             </div>
             <span>Julius</span>
           </div>
-          <nav className="flex gap-4 md:gap-6 md:ml-auto">
-            <Link href="#" className="text-sm font-medium hover:text-primary">
-              Política de Privacidade
-            </Link>
-            <Link href="#" className="text-sm font-medium hover:text-primary">
-              Termos de Uso
-            </Link>
-            <Link href="#" className="text-sm font-medium hover:text-primary">
-              Contato
-            </Link>
-          </nav>
-          <p className="text-sm text-muted-foreground md:ml-auto md:order-first">
-            &copy; {new Date().getFullYear()} Julius. Todos os direitos reservados.
+          <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
+            © 2025 Julius. Todos os direitos reservados.
           </p>
         </div>
       </footer>
     </div>
   )
 }
-
-// Dados de exemplo
-const features = [
-  {
-    icon: <CheckCircle className="h-6 w-6 text-primary" />,
-    title: "Simulação de Gastos",
-    description: "Calcule quanto você pode gastar por dia com base em suas receitas, despesas e metas de economia.",
-  },
-  {
-    icon: <CheckCircle className="h-6 w-6 text-primary" />,
-    title: "Controle de Finanças",
-    description: "Monitore suas entradas e saídas de forma prática e intuitiva.",
-  },
-  {
-    icon: <CheckCircle className="h-6 w-6 text-primary" />,
-    title: "Metas Personalizadas",
-    description: "Defina seus objetivos financeiros e acompanhe seu progresso diariamente.",
-  },
-]
-
-const testimonials = [
-  {
-    avatar: "/placeholder.svg?height=40&width=40",
-    name: "Ana Silva",
-    title: "Empreendedora",
-    content:
-      "Com o Julius, consigo ver exatamente quanto posso gastar sem comprometer meu orçamento. Recomendo!",
-  },
-  {
-    avatar: "/placeholder.svg?height=40&width=40",
-    name: "Carlos Souza",
-    title: "Autônomo",
-    content:
-      "A simplicidade e eficiência do Julius me ajudaram a alcançar minhas metas financeiras. Excelente ferramenta!",
-  },
-]
-
-const pricingPlans = [
-  {
-    name: "Básico",
-    description: "Ideal para controle financeiro pessoal",
-    price: 19,
-    featured: false,
-    features: [
-      "Controle de receitas e despesas",
-      "Simulação diária de gastos",
-      "Relatórios simples",
-      "Suporte via e-mail",
-    ],
-  },
-  {
-    name: "Pro",
-    description: "Para um controle mais detalhado",
-    price: 49,
-    featured: true,
-    features: [
-      "Tudo do Básico",
-      "Metas personalizadas",
-      "Relatórios avançados",
-      "Suporte prioritário",
-      "Integração bancária",
-    ],
-  },
-  {
-    name: "Premium",
-    description: "Para profissionais e empresas",
-    price: 99,
-    featured: false,
-    features: [
-      "Controle completo das finanças",
-      "Relatórios detalhados",
-      "Metas financeiras avançadas",
-      "Suporte 24/7",
-      "Integração com múltiplas contas",
-      "Consultoria financeira",
-    ],
-  },
-]
