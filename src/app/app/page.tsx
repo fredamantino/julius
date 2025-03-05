@@ -1,5 +1,14 @@
-export default function Page() {
+import { auth } from "@/services/auth";
+
+export default async function Page() {
+    const session = await auth();
     return (
-        <h1>App Page</h1>
-    );
+        <main>
+            <div>
+                <h1>{session?.user?.email}</h1>
+            </div>
+        </main>
+
+    )
+
 }
